@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -48,7 +49,6 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="imageView" destination="Uwi-Q7-Ulc" id="afN-CV-kHC"/>
-                                            <segue destination="YU7-IM-Ig9" kind="show" id="VhZ-mW-wSI"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -66,32 +66,67 @@
                     <navigationItem key="navigationItem" title="Photos" id="al0-Dn-SNj">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="3FY-7R-9Z4">
                             <connections>
-                                <segue destination="vRW-dY-p5z" kind="show" identifier="goToAddPhoto" action="showDetailViewController:sender:" id="B87-t2-t40"/>
+                                <action selector="goToAddPhotos:" destination="BYZ-38-t0r" id="3dC-IF-1bw"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="photosCollectionView" destination="OEb-SQ-7vm" id="tvY-Wu-1YP"/>
+                        <segue destination="vRW-dY-p5z" kind="show" identifier="goToAddPhoto" id="39i-zI-Cu5"/>
+                        <segue destination="YU7-IM-Ig9" kind="show" identifier="goToPhotoDetail" id="A3b-a6-y4w"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="476" y="133.5832083958021"/>
         </scene>
-        <!--View Controller-->
+        <!--Title-->
         <scene sceneID="1go-u8-SqG">
             <objects>
-                <viewController id="YU7-IM-Ig9" sceneMemberID="viewController">
+                <viewController id="YU7-IM-Ig9" customClass="PhotoDetailViewController" customModule="Custom_Collection_View" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zXE-Wu-wFp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img10" translatesAutoresizingMaskIntoConstraints="NO" id="emT-u8-6Ge">
+                                <rect key="frame" x="0.0" y="64" width="375" height="386"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="emT-u8-6Ge" secondAttribute="height" multiplier="375:386" id="N5E-7d-oWs"/>
+                                </constraints>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7v7-uG-CxQ">
+                                <rect key="frame" x="0.0" y="446" width="375" height="221"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="7v7-uG-CxQ" secondAttribute="height" multiplier="375:221" id="7FO-ds-H2T"/>
+                                </constraints>
+                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="emT-u8-6Ge" firstAttribute="top" secondItem="Kyh-jL-9No" secondAttribute="top" id="3jp-bZ-94P"/>
+                            <constraint firstItem="emT-u8-6Ge" firstAttribute="trailing" secondItem="Kyh-jL-9No" secondAttribute="trailing" id="40y-sx-8Ww"/>
+                            <constraint firstItem="7v7-uG-CxQ" firstAttribute="leading" secondItem="Kyh-jL-9No" secondAttribute="leading" id="If0-B8-e1G"/>
+                            <constraint firstItem="7v7-uG-CxQ" firstAttribute="bottom" secondItem="Kyh-jL-9No" secondAttribute="bottom" id="JUE-kg-aIG"/>
+                            <constraint firstItem="emT-u8-6Ge" firstAttribute="leading" secondItem="zXE-Wu-wFp" secondAttribute="leading" id="Jst-Wh-Tsg"/>
+                            <constraint firstItem="7v7-uG-CxQ" firstAttribute="trailing" secondItem="Kyh-jL-9No" secondAttribute="trailing" id="qIz-cv-5Wk"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Kyh-jL-9No"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="Ev5-ua-5tL">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="icons8-more-32" id="zKS-5b-4Kl"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="emT-u8-6Ge" id="sBR-BM-P7A"/>
+                        <outlet property="textView" destination="7v7-uG-CxQ" id="uac-72-pwC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vrG-Tj-oBp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1289" y="573"/>
+            <point key="canvasLocation" x="1288.8" y="572.56371814092961"/>
         </scene>
         <!--Add Photo-->
         <scene sceneID="sCW-zm-NWj">
@@ -166,9 +201,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="B5p-Zo-fVt"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Add Photo" id="b3i-l6-Gl3">
-                        <barButtonItem key="rightBarButtonItem" image="icons8-more-32" id="wiq-RD-4ai"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Add Photo" id="Ptl-x9-3c2"/>
                     <connections>
                         <outlet property="newDescription" destination="eIP-0p-uLT" id="xLy-P6-wRb"/>
                         <outlet property="newImage" destination="04G-Vb-u7S" id="kYA-C1-fxA"/>
@@ -189,6 +222,9 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="VnJ-bc-xcl">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="KyV-qm-FVL"/>
                     </connections>
@@ -200,5 +236,6 @@
     </scenes>
     <resources>
         <image name="icons8-more-32" width="32" height="32"/>
+        <image name="img10" width="900" height="557"/>
     </resources>
 </document>

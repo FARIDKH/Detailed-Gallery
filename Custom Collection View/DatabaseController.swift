@@ -65,4 +65,10 @@ class DatabaseController {
             }
         }
     }
+    class func deleteObject(photo : Photo) -> Bool {
+        let photoRequest = NSFetchRequest<Photo>.init(entityName: "Photo")
+        persistentContainer.viewContext.delete(photo)
+        saveContext()
+        return true
+    }
 }
