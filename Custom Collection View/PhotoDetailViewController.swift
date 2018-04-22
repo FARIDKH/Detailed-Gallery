@@ -24,6 +24,29 @@ class PhotoDetailViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func alertIsClicked(_ sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let attributedText = NSAttributedString(string: "Report", attributes: [
+            NSAttributedStringKey.font : UIFont.systemFont(ofSize: 18),
+            NSAttributedStringKey.foregroundColor : UIColor.red])
+        let action = UIAlertAction(title: "Report", style: .destructive, handler: nil)
+        
+        alert.addAction(action)
+        alert.addAction(
+            UIAlertAction(title: "Share", style: .default, handler: nil)
+        )
+        alert.addAction(
+            UIAlertAction(title: "Save Image", style: .default, handler: nil)
+        )
+        alert.addAction(
+            UIAlertAction(title: "Copy Link", style: .default, handler: nil)
+        )
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+            NSLog("The \"Cancel\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

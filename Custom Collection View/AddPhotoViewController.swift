@@ -57,7 +57,7 @@ class AddPhotoViewController: UIViewController,UIImagePickerControllerDelegate,U
     
     @IBAction func addNewPhoto(_ sender: UIButton) {
         self.addNewPhoto()
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     

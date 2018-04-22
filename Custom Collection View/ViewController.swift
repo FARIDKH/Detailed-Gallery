@@ -9,7 +9,14 @@
 import UIKit
 import CoreData
 
-
+extension UINavigationItem {
+    open override func awakeFromNib() {
+        super.awakeFromNib()
+        let backItem = UIBarButtonItem()
+        backItem.title = " "
+        self.backBarButtonItem = backItem
+    }
+}
 
 class ViewController: UIViewController, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
@@ -20,7 +27,6 @@ class ViewController: UIViewController, UICollectionViewDataSource,UICollectionV
         super.viewDidLoad()
         photosCollectionView.dataSource = self
         photosCollectionView.delegate = self
-        
     }
     
     func getDataFromDatabase() {
@@ -28,9 +34,14 @@ class ViewController: UIViewController, UICollectionViewDataSource,UICollectionV
         let fetchRequest = NSFetchRequest<Photo>.init(entityName: "Photo")
         do {
             let results = try DatabaseController.persistentContainer.viewContext.fetch(fetchRequest)
+            self.images = [Data]()
             for result in results {
                 let image = result.name! as Data
                 images.append(image)
+                
+                if image.count == results.count {
+                    break
+                }
             }
             
         } catch {
@@ -38,6 +49,12 @@ class ViewController: UIViewController, UICollectionViewDataSource,UICollectionV
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getDataFromDatabase()
+        photosCollectionView.reloadData()
+    }
+//
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = round((view.bounds.size.width)/3)
         let height = round((view.bounds.size.height)/4)
@@ -58,7 +75,6 @@ class ViewController: UIViewController, UICollectionViewDataSource,UICollectionV
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! PhotosCollectionViewCell
-        
         cell.imageView.image = UIImage(data: images[indexPath.item])
         return cell
     }
